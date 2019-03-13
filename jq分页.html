@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+       .pagination li{
+           padding:0 10px;
+       }
+       .Page{
+          display: flex;
+          padding-left:50px;
+          padding-top:50px;
+       }
+       .addCol{
+           border:1px solid #ccc;
+       }
+    </style>
+</head>
+<body>
+        <nav class="Page example">
+                <span class="pre_page"><<</span>
+                <ul class="pagination">
+                  <li class="page-item addCol">1</li>
+                  <li class="page-item">2</li>
+                  <li class="page-item">3</li>
+                </ul>
+                <span class="next_page">>></span>
+        </nav>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+var page = 1;
+var arrAll = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+var arr = [1,2,3,4,5,6,7,8,9,10];
+let len = $('.page-item').length;
+window.onload = function(){
+　　var oUl = document.querySelector(".pagination");
+    var lis = oUl.getElementsByTagName('li');
+        $('.page-item').each(function(i){
+                $(this).click(function(){
+                   page = $(this).html();
+                   $(this).addClass('addCol').siblings().removeClass('addCol')
+                   console.log(arrAll.slice((page*10)-10,page*10),'每一个');
+                })
+                
+        });
+        $('.pre_page').click(function(){
+                if(page>1){
+                   page--;
+                }
+                lis[0].classList.remove('addCol')
+                for(let i=0; i<lis.length; i++){
+                        // lis[i].setAttribute('style','')
+                        if(lis[i].className==='page-item addCol'){
+                             lis[i].classList.remove('addCol')
+                        }
+                }
+                lis[page-1].classList.add("addCol")
+                console.log(arrAll.slice((page*10)-10,page*10),'上一页');
+        })
+        $('.next_page').click(function(){
+                if(page<len){
+                   page++;
+                }
+               lis[0].classList.remove('addCol')
+               for(let i=0; i<lis.length; i++){
+                        if(lis[i].className==='page-item addCol'){
+                             lis[i].classList.remove('addCol')
+                        }
+               }
+               lis[page-1].classList.add("addCol")
+               console.log(arrAll.slice((page*10)-10,page*10),'下一页');
+                
+        })
+}
+</script>
+</html>
